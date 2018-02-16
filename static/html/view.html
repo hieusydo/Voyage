@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voyage</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Voyage</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="btn btn-sm btn-outline-danger ml-auto my-sm-0" href="#" role="button">Log out</a>
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        <div class="row text-center">
+            <div class="col">
+                <a class="btn btn-primary" href="#" role="button">Add</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="#" role="button">View All</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="#" role="button">Suggestions</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3" id="voyageMap"></div>
+
+    <script>
+        function initMap() {
+            var uluru = {lat: -25.363, lng: 131.044};
+            var map = new google.maps.Map(document.getElementById('voyageMap'), {
+                zoom: 5,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+    </script>
+
+    <!-- More secure way to include the key?  -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwN4ya6pztrnG0S6wSpiFZfTcKRK-_50o&callback=initMap"
+    async defer></script>
+
+</body>
+</html>

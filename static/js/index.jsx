@@ -6,5 +6,5 @@ const title = <h1>Bon Voyage!</h1>;
 
 ReactDOM.render(
     title,
-    document.getElementById("map")
+    document.getElementById("navbar")
 );

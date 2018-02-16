@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Bonbon');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#voyageMap {
+    height: 400px;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-family: 'Bonbon', cursive;
+    font-size: 30pt;
+}
