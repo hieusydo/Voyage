@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Bonbon');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 
 html, body {
     height: 100%;
@@ -14,6 +14,11 @@ html, body {
 }
 
 .navbar-brand {
-    font-family: 'Bonbon', cursive;
-    font-size: 30pt;
+    font-family: 'Pacifico', cursive;
+    font-size: 30px;
+}
+
+#greeting {
+    font-family: 'Pacifico', cursive;
+	font-size: 25px;
 }

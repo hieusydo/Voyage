@@ -7,3 +7,5 @@
 - [ ] Overlay over the map: by city, state, country, etc.
 - [ ] Database
 
+## Instructions
+- Run static files: `npm run watch`
