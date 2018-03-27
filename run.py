@@ -1,27 +1,33 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template
+# Run a test server.
+from app import app
+app.run(host='0.0.0.0', port=8080, debug=True)
 
-app = Flask(__name__, static_folder="static", template_folder="templates")
 
-app.config['TEMPLATES_AUTO_RELOAD'] = True
-# url_for('static', filename='style.css')
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+# from flask import Flask, render_template
 
-@app.route("/add")
-def add():
-    return render_template("add.html")
+# app = Flask(__name__, static_folder="static", template_folder="templates")
 
-@app.route("/view")
-def view():
-    return render_template("view.html")
+# app.config['TEMPLATES_AUTO_RELOAD'] = True
+# # url_for('static', filename='style.css')
 
-@app.route("/logout")
-def logout():
-    return render_template("logout.html")
+# @app.route("/")
+# def index():
+#     return render_template("index.html")
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# @app.route("/add")
+# def add():
+#     return render_template("add.html")
+
+# @app.route("/view")
+# def view():
+#     return render_template("view.html")
+
+# @app.route("/logout")
+# def logout():
+#     return render_template("logout.html")
+
+# if __name__ == "__main__":
+#     app.run(debug=True)
