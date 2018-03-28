@@ -1,15 +1,16 @@
 # Import flask and template operators
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
 # Define the WSGI application object
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", template_folder="templates")
 
 # Configurations
 app.config.from_object('config')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 # Define the database object which is imported
 # by modules and controllers
@@ -27,6 +28,10 @@ from app.mod_auth.controllers import mod_auth as auth_module
 app.register_blueprint(auth_module)
 # app.register_blueprint(xyz_module)
 # ..
+
+@app.route("/")
+def index():
+    return redirect(url_for('auth.signin'))
 
 # Build the database:
 # This will create the database file using SQLAlchemy

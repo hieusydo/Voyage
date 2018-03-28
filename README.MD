@@ -3,7 +3,7 @@
 ## Todo
 
 MVP: 
-- [ ] Login
+- [x] Login
 - [ ] Add a landmark
 - [ ] View landmarks
 - [ ] Overlay over the map: by city, state, country, etc.
@@ -27,6 +27,14 @@ More:
 ## Databases
 
 - Install [Postgresql](https://www.postgresql.org/)
+
+
+## Flask Blueprints
+
+- Flow of mod_auth: 
+   - import the **controllers** in main `__init__.py` 
+   - controllers import **models** (interacting with DB) and **forms** (dependent module)
+
 
 
 ## References
