@@ -36,9 +36,15 @@ More:
    - controllers import **models** (interacting with DB) and **forms** (dependent module)
 
 
+## Google Maps
+
+- https://developers.google.com/maps/documentation/javascript/tutorial
+- https://developers.google.com/maps/documentation/javascript/places
+
 
 ## References
-
+- [Flask Blueprints](http://flask.pocoo.org/docs/0.12/blueprints/)
 - https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications
 - http://flask.pocoo.org/docs/0.12/design/
 - https://flask-restful.readthedocs.io/en/latest/quickstart.html#full-example
+

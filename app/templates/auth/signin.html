@@ -1,7 +1,16 @@
 <!doctype html>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<html>
 
+<!-- HEADER COMPONENT -->
+<head>
+  <title>Voyage</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+</head>
+
+<body>
 {% macro render_field(field, placeholder=None) %}
 {% if field.errors %}
 <div>
@@ -48,3 +57,6 @@
     </form>  
   </div>
 </div>
+
+</body>
+</html>

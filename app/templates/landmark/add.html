@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Voyage</title>
@@ -28,27 +28,32 @@
             <a class="btn btn-primary" href="/" role="button">Suggestions</a>
         </div>
     </div>
-</div>
 
-<div class="container mt-3" id="voyageMap"></div>
+    <div class="container">
+        <form>
+            <div class="form-group mb-4">
+                <label for="landmarkName">Landmark Name</label>
+                <input type="text" class="form-control" id="lmName" aria-describedby="landmarkName" placeholder="Enter landmark">
+            </div>
 
-<script>
-    function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('voyageMap'), {
-            zoom: 5,
-            center: uluru
-        });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
-    }
-</script>
+            <div class="form-group mb-4">
+                <label for="photoUpload">Upload your photos</label>
+                <input type="file" class="form-control-file" id="photoUpload">
+            </div>
 
-<!-- More secure way to include the key?  -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwN4ya6pztrnG0S6wSpiFZfTcKRK-_50o&callback=initMap"
-async defer></script>
+            <select class="custom-select mb-4">
+                <option selected>Rate your experience</option>
+                <option value="1">1 Star</option>
+                <option value="2">2 Star</option>
+                <option value="3">3 Star</option>
+            </select>
 
+            <div class="form-group mb-4">
+                <label for="landmarkComment">Notes</label>
+                <textarea class="form-control" id="lmComment" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </body>
-</html>
+</html> -->

@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html>
+
+<!-- HEADER COMPONENT -->
 <head>
   <title>Voyage</title>
   <meta name="viewport" content="initial-scale=1.0">
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href=".{{ url_for('static',filename='style/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
 </head>
+
 <body>
+  <!-- NAVBAR COMPONENT -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Voyage</a>
+    <a class="navbar-brand" href="/auth/home">Voyage</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <a class="btn btn-sm btn-outline-danger ml-auto my-sm-0" href="#" role="button">Log out</a>
+      <a class="btn btn-sm btn-outline-danger ml-auto my-sm-0" href="/auth/logout" role="button">Log out</a>
     </div>
   </nav>
 
+
   <div class="container mt-3">
+    <!-- NAV COMPONENT -->
     <div class="row text-center">
       <div class="col">
-        <a class="btn btn-primary" href="add" role="button">Add</a>
+        <a class="btn btn-primary" href="/landmark/add" role="button">Add</a>
       </div>
       <div class="col">
-        <a class="btn btn-primary" href="view" role="button">View All</a>
+        <a class="btn btn-primary" href="/map/display" role="button">View All</a>
       </div>
       <div class="col">
-        <a class="btn btn-primary" href="/" role="button">Suggestions</a>
+        <a class="btn btn-primary" href="/recommend/get" role="button">Suggestions</a>
       </div>
     </div>
 

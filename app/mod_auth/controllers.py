@@ -20,7 +20,6 @@ mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
 # Set the route and accepted methods
 @mod_auth.route('/signin/', methods=['GET', 'POST'])
 def signin():
-
     # If sign in form is submitted
     form = LoginForm(request.form)
 
@@ -44,3 +43,7 @@ def signin():
 @mod_auth.route('/home/')
 def home():
     return render_template("auth/home.html")
+
+@mod_auth.route('/logout/')
+def logout():
+    return render_template("auth/logout.html")

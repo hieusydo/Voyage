@@ -4,10 +4,10 @@ DEBUG = True
 # Define the application directory
 import os
 
-# Define the database - we are working with
+# Define the database - we are working with Postgresql
 # BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
 # SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL'] + os.path.join(BASE_DIR, 'app.db')
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:root@localhost:5432/voyage' 
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:root@localhost:5432/voyage' # bad, bad, cuz exposing creds... DEV USE ONLY
 DATABASE_CONNECT_OPTIONS = {}
 
 # Application threads. A common general assumption is
@@ -21,7 +21,7 @@ CSRF_ENABLED     = True
 
 # Use a secure, unique and absolutely secret key for
 # signing the data. 
-CSRF_SESSION_KEY = "secret"
+CSRF_SESSION_KEY = "Xd34$9Pu"
 
 # Secret key for signing cookies
-SECRET_KEY = "secret"
+SECRET_KEY = "Gts75*xC"
