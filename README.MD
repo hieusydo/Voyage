@@ -3,10 +3,13 @@
 ## Todo
 
 MVP: 
-- [x] Login
-- [ ] Add a landmark
-- [ ] View landmarks
-- [ ] Overlay over the map: by city, state, country, etc.
+- [ ] Login (`mod_auth`)
+   - Must use session and cookies
+- [ ] Add a landmark (`mod_landmark`)
+   - How to parse location query?
+- [ ] View landmarks & render on map (`mod_map`)
+   - Overlay over the map: by city, state, country, etc.
+   - Style [map](https://developers.google.com/maps/documentation/javascript/styling) and [markers](https://developers.google.com/maps/documentation/javascript/custom-markers)
 
 More: 
 - [ ] Register
@@ -23,6 +26,10 @@ More:
 1. Install all dependencies: `env/bin/pip install -r requirements.txt`
 1. `env/bin/python run.py` to run the app locally
 
+Advanced: 
+- `$ source env/bin/activate`
+- `(env)$ deactivate`
+
 
 ## Databases
 
@@ -34,6 +41,9 @@ More:
 - Flow of mod_auth: 
    - import the **controllers** in main `__init__.py` 
    - controllers import **models** (interacting with DB) and **forms** (dependent module)
+
+
+## Deployment on AWS
 
 
 ## Google Maps

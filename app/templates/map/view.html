@@ -11,51 +11,51 @@
 </head>
 
 <body>
-    <!-- NAVBAR COMPONENT -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <!-- TITLE BAR COMPONENT -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/auth/home">Voyage</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <a class="btn btn-sm btn-outline-danger ml-auto my-sm-0" href="/auth/logout" role="button">Log out</a>
     </div>
-    </nav>
+  </nav>
 
-    <div class="container mt-3">
-        <!-- NAV COMPONENT -->
-        <div class="row text-center">
-          <div class="col">
-            <a class="btn btn-primary" href="/landmark/add" role="button">Add</a>
-          </div>
-          <div class="col">
-            <a class="btn btn-primary" href="/map/display" role="button">View All</a>
-          </div>
-          <div class="col">
-            <a class="btn btn-primary" href="/recommend/get" role="button">Suggestions</a>
-          </div>
-        </div>
+  <!-- NAVBAR COMPONENT -->
+  <div class="container mt-3">
+    <div class="row text-center">
+      <div class="col">
+        <a class="btn btn-primary" href="/landmark/add" role="button">Add</a>
+      </div>
+      <div class="col">
+        <a class="btn btn-primary" href="/map/display" role="button">View All</a>
+      </div>
+      <div class="col">
+        <a class="btn btn-primary" href="/recommend/get" role="button">Suggestions</a>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="container mt-3" id="voyageMap"></div>
+  <div class="container mt-3" id="voyageMap"></div>
 
-<script>
+  <script>
     function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('voyageMap'), {
-            zoom: 5,
-            center: uluru
-        });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
-        console.log("initmap...");
+      var uluru = {lat: -25.363, lng: 131.044};
+      var map = new google.maps.Map(document.getElementById('voyageMap'), {
+        zoom: 5,
+        center: uluru
+      });
+      var marker = new google.maps.Marker({
+        position: uluru,
+        map: map
+      });
+      console.log("initmap...");
     }
-</script>
+  </script>
 
-<!-- More secure way to include the key?  -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwN4ya6pztrnG0S6wSpiFZfTcKRK-_50o&callback=initMap"
-async defer></script>
+  <!-- More secure way to include the key?  -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwN4ya6pztrnG0S6wSpiFZfTcKRK-_50o&callback=initMap"
+  async defer></script>
 
 </body>
 </html>
