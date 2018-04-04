@@ -17,7 +17,16 @@ mod_landmark = Blueprint('landmark', __name__, url_prefix='/landmark')
 
 @mod_landmark.route('/getAll/', methods=['GET'])
 def getAll():
-    return jsonify({'landmarks': ("1.0", "0.0")})
+    uid = session['user_id']
+    landmarks = Landmark.query.filter_by(usrID=uid).all()
+    # print(landmarks)
+    
+    # Extract and reformat each landmark info
+    allLms = []
+    for l in landmarks:
+        allLms.append((l.lmName, l.lmLat, l.lmLng, l.photoFileName, l.lmRating, l.lmComments))
+
+    return jsonify({'landmarks': allLms})
 
 @mod_landmark.route('/add/', methods=['GET', 'POST'])
 def add():
