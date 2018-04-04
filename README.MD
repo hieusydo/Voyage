@@ -6,7 +6,7 @@ MVP:
 - [ ] Login (`mod_auth`)
    - Must use session and cookies
 - [ ] Add a landmark (`mod_landmark`)
-   - How to parse location query? [Google Map search box](https://developers.google.com/maps/documentation/javascript/examples/places-searchbox)
+   - How to parse location query? [Google Map search box](https://developers.google.com/maps/documentation/javascript/examples/places-searchbox) - [Google Geocode](https://developers.google.com/maps/documentation/geocoding/intro)
 - [ ] View landmarks & render on map (`mod_map`)
    - Overlay over the map: by city, state, country, etc.
    - Style [map](https://developers.google.com/maps/documentation/javascript/styling) and [markers](https://developers.google.com/maps/documentation/javascript/custom-markers)
