@@ -29,6 +29,8 @@ class User(Base):
     role     = db.Column(db.SmallInteger, nullable=False)
     status   = db.Column(db.SmallInteger, nullable=False)
 
+    landmarks = db.relationship("Landmark", backref="user", lazy=True)
+
     # New instance instantiation procedure
     def __init__(self, name, email, password):
 
@@ -38,3 +40,22 @@ class User(Base):
 
     def __repr__(self):
         return '<User %r>' % (self.name)  
+
+class Landmark(Base):
+    __tablename__ = 'landmark'
+
+    usrID = db.Column(db.Integer, db.ForeignKey("auth_user.id"), nullable=False)
+    lmName = db.Column(db.String(128),  nullable=False)
+    photoFileName = db.Column(db.String(128),  nullable=False)
+    lmRating = db.Column(db.SmallInteger, nullable=False)
+    lmComments = db.Column(db.String(192),  nullable=False)
+
+    def __init__(self, uid, name, filename, rating, comments):
+        self.usrID = uid
+        self.lmName = name
+        self.photoFileName = filename
+        self.lmRating = rating
+        self.lmComments = comments
+
+    def __repr__(self):
+        return '<Landmark %r>' % (self.lmName)  
