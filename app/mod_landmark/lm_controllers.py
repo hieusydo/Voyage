@@ -69,7 +69,7 @@ def add():
 
         print(usrID, form.lmName.data, filename, form.lmRating.data, form.lmComments.data)
 
-        return redirect(url_for('auth.home'))
+        return redirect(url_for('map.display'))
 
     return render_template("landmark/add.html", form=form)
 
