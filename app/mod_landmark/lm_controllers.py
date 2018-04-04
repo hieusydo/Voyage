@@ -5,6 +5,7 @@ from werkzeug import secure_filename
 
 import urllib2
 import json
+from flask.json import jsonify
 
 from app import db
 
@@ -13,6 +14,10 @@ from app.mod_landmark.lm_forms import AddLmForm
 from app.mod_auth.models import Landmark
 
 mod_landmark = Blueprint('landmark', __name__, url_prefix='/landmark')
+
+@mod_landmark.route('/getAll/', methods=['GET'])
+def getAll():
+    return jsonify({'landmarks': ("1.0", "0.0")})
 
 @mod_landmark.route('/add/', methods=['GET', 'POST'])
 def add():

@@ -4,8 +4,12 @@ from flask import Flask, render_template, redirect, url_for
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
+# Make cross-origin AJAX possible
+from flask_cors import CORS
+
 # Define the WSGI application object
 app = Flask(__name__, static_folder="static", template_folder="templates")
+CORS(app)
 
 # Configurations
 app.config.from_object('config')

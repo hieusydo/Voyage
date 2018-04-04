@@ -40,6 +40,8 @@
 
   <script>
     function initMap() {
+      console.log("initmap...");
+      
       var uluru = {lat: -25.363, lng: 131.044};
       var styledMapType = new google.maps.StyledMapType([
         {
@@ -276,18 +278,31 @@
       map.mapTypes.set('styled_map', styledMapType);
       map.setMapTypeId('styled_map');
 
+      // Get session username
+      usr = "hieu@email.com"
 
-      // Get landmarks from DB
+      // Make AJAX call to get landmarks
+      var req = new XMLHttpRequest();
+      req.open('GET', 'http://localhost:8080/landmark/getAll/', true)
+      req.setRequestHeader('Access-Control-Allow-Origin', '*')
+      req.setRequestHeader('Access-Control-Allow-Headers', '*');
 
+      req.onreadystatechange = function () {
+        if (req.readyState === 4 && req.status === 200) {
+            console.log('Got back response');
+            console.log(req.responseText);
 
-      // Loop through and draw marker for each
+            allLms = req.responseText;
 
+            // Loop through and draw marker for each
+            var marker = new google.maps.Marker({
+              position: uluru,
+              map: map
+            });            
+        }
+      };
 
-      var marker = new google.maps.Marker({
-        position: uluru,
-        map: map
-      });
-      console.log("initmap...");
+      req.send();
     }
   </script>
 

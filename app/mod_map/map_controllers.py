@@ -13,4 +13,5 @@ mod_map = Blueprint('map', __name__, url_prefix='/map')
 def display():
     return render_template("map/view.html")
 
+
     
