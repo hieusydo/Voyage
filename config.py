@@ -6,7 +6,7 @@ DEBUG = bool(os.environ.get('V_DEBUG'))
 SQLALCHEMY_DATABASE_URI = "postgresql://" + os.environ.get('RDS_USERNAME') + ":" + os.environ.get('RDS_PASSWORD')\
                             + "@" + os.environ.get('RDS_HOSTNAME') + ":" + os.environ.get('RDS_PORT') + "/"\
                             + os.environ.get('RDS_DB_NAME')
-print(SQLALCHEMY_DATABASE_URI)
+# print(SQLALCHEMY_DATABASE_URI)
 DATABASE_CONNECT_OPTIONS = {}
 
 # Application threads. A common general assumption is
