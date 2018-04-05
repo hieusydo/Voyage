@@ -1,12 +1,7 @@
 # Import Form and RecaptchaField (optional)
 from flask_wtf import FlaskForm 
-
-# Import Form elements such as TextField and BooleanField (optional)
-from wtforms import TextField, PasswordField # BooleanField
-
-# Import Form validators
+from wtforms import TextField, PasswordField 
 from wtforms.validators import Required, Email
-
 
 # Define the login form (WTForms)
 class LoginForm(FlaskForm):

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -29,7 +29,7 @@ application.register_blueprint(lm_module)
 
 @application.route("/")
 def index():
-    return "<p>Please go to /auth/signin/</p>"
+    return redirect(url_for('auth.signin'))
 
 # HTTP error handling
 @application.errorhandler(404)

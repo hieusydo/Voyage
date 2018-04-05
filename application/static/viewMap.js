@@ -21,8 +21,8 @@ function drawMap() {
 
   req.onreadystatechange = function () {
     if (req.readyState === 4 && req.status === 200) {
-        console.log('Got back response');
-        console.log(req.responseText);
+        // console.log('Got back response');
+        // console.log(req.responseText);
         // Jsonify response
         data = JSON.parse(req.responseText);
         allLms = data.landmarks
@@ -41,7 +41,7 @@ function drawMap() {
           allLng += l[2]
         }
         centerCoord = { lat: allLat/allLms.length, lng: allLng/allLms.length }
-        console.log("center: ", centerCoord)
+        // console.log("center: ", centerCoord)
 
         // Start to draw map
         var styledMapType = new google.maps.StyledMapType([

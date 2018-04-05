@@ -39,6 +39,7 @@ class User(Base):
     def __repr__(self):
         return '<User %r>' % (self.name)  
 
+# Many to One relationship with User
 class Landmark(Base):
     __tablename__ = 'landmark'
 

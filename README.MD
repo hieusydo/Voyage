@@ -1,6 +1,6 @@
 # Voyage - A Visual Travel Journal
 
-http://voyage.fkqpxtepmm.us-west-2.elasticbeanstalk.com/auth/signin/
+http://voyage.fkqpxtepmm.us-west-2.elasticbeanstalk.com
 
 ## Todo
 

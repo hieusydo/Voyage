@@ -1,16 +1,10 @@
-from flask import Blueprint, request, render_template, \
-                  flash, g, session, redirect, url_for
-
-from werkzeug import secure_filename
-
-import urllib2
-import json
+from flask import Blueprint, request, render_template, session, redirect, url_for
 from flask.json import jsonify
+from werkzeug import secure_filename
+import urllib2, json
 
 from application import db
-
 from application.mod_landmark.lm_forms import AddLmForm
-
 from application.mod_auth.models import Landmark
 
 mod_landmark = Blueprint('landmark', __name__, url_prefix='/landmark')
@@ -55,10 +49,10 @@ def add():
         try:
             lat = data["results"][0]["geometry"]["location"]["lat"]
             lng = data["results"][0]["geometry"]["location"]["lng"]
-            print(form.lmName.data, lat, lng)
+            # print(form.lmName.data, lat, lng)
         except:
             # TODO: Handle when user-entered landmark can't be geocoded
-            print(data)
+            # print(data)
             print("Error reading json obj") 
 
         # Insert into db
@@ -67,7 +61,7 @@ def add():
         db.session.add(landmark)
         db.session.commit()
 
-        print(usrID, form.lmName.data, filename, form.lmRating.data, form.lmComments.data)
+        # print(usrID, form.lmName.data, filename, form.lmRating.data, form.lmComments.data)
 
         return redirect(url_for('map.display'))
 
