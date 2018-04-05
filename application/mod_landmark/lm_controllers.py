@@ -11,6 +11,9 @@ mod_landmark = Blueprint('landmark', __name__, url_prefix='/landmark')
 
 @mod_landmark.route('/getAll/', methods=['GET'])
 def getAll():
+    if 'user_id' not in session:
+        return redirect(url_for('auth.signin'))
+
     uid = session['user_id']
     landmarks = Landmark.query.filter_by(usrID=uid).all()
     # print(landmarks)
@@ -24,6 +27,9 @@ def getAll():
 
 @mod_landmark.route('/add/', methods=['GET', 'POST'])
 def add():
+    if 'user_id' not in session:
+        return redirect(url_for('auth.signin'))    
+    
     form = AddLmForm()
 
     if form.validate_on_submit():

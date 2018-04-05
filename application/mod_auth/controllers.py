@@ -27,8 +27,12 @@ def verify():
 
 @mod_auth.route('/home/')
 def home():
+    if 'user_id' not in session:
+        return redirect(url_for('auth.signin'))
+
     return render_template("auth/home.html")
 
 @mod_auth.route('/logout/')
 def logout():
+    session.pop('user_id', None)
     return redirect(url_for('auth.signin'))
