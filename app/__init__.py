@@ -8,20 +8,20 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
 # Define the WSGI application object
-app = Flask(__name__, static_folder="static", template_folder="templates")
-CORS(app)
+application = Flask(__name__, static_folder="static", template_folder="templates")
+CORS(application)
 
 # Configurations
-app.config.from_object('config')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['TEMPLATES_AUTO_RELOAD'] = True
+application.config.from_object('config')
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+application.config['TEMPLATES_AUTO_RELOAD'] = True
 
 # Define the database object which is imported
 # by modules and controllers
-db = SQLAlchemy(app)
+db = SQLAlchemy(application)
 
 # Sample HTTP error handling
-@app.errorhandler(404)
+@application.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
 
@@ -31,13 +31,13 @@ from app.mod_map.map_controllers import mod_map as map_module
 from app.mod_landmark.lm_controllers import mod_landmark as lm_module
 
 # Register blueprint(s)
-app.register_blueprint(auth_module)
-app.register_blueprint(map_module)
-app.register_blueprint(lm_module)
+application.register_blueprint(auth_module)
+application.register_blueprint(map_module)
+application.register_blueprint(lm_module)
 # app.register_blueprint(xyz_module)
 # ..
 
-@app.route("/")
+@application.route("/")
 def index():
     return redirect(url_for('auth.signin'))
 
