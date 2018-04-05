@@ -6,17 +6,20 @@ DEBUG = bool(os.environ.get('V_DEBUG'))
 SQLALCHEMY_DATABASE_URI = "postgresql://" + os.environ.get('RDS_USERNAME') + ":" + os.environ.get('RDS_PASSWORD')\
                             + "@" + os.environ.get('RDS_HOSTNAME') + ":" + os.environ.get('RDS_PORT') + "/"\
                             + os.environ.get('RDS_DB_NAME')
-# print(SQLALCHEMY_DATABASE_URI)
-DATABASE_CONNECT_OPTIONS = {}
+# # # print(SQLALCHEMY_DATABASE_URI)
+# # DATABASE_CONNECT_OPTIONS = {}
 
-# Application threads. A common general assumption is
-# using 2 per available processor cores - to handle
-# incoming requests using one and performing background
-# operations using the other.
-THREADS_PER_PAGE = 2
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+TEMPLATES_AUTO_RELOAD = True
 
-# Enable protection agains *Cross-site Request Forgery (CSRF)*
-CSRF_ENABLED     = True
+# # Application threads. A common general assumption is
+# # using 2 per available processor cores - to handle
+# # incoming requests using one and performing background
+# # operations using the other.
+# THREADS_PER_PAGE = 2
+
+# # Enable protection agains *Cross-site Request Forgery (CSRF)*
+# CSRF_ENABLED     = True
 
 # Use a secure, unique and absolutely secret key for
 # signing the data. 

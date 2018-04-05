@@ -15,7 +15,7 @@ function drawMap() {
 
   // Make AJAX call to get landmarks
   var req = new XMLHttpRequest();
-  req.open('GET', 'http://localhost:8080/landmark/getAll/', true) // true = async
+  req.open('GET', 'http://voyage.fkqpxtepmm.us-west-2.elasticbeanstalk.com/landmark/getAll/', true) // true = async
   req.setRequestHeader('Access-Control-Allow-Origin', '*')
   req.setRequestHeader('Access-Control-Allow-Headers', '*');
 
