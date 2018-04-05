@@ -2,3 +2,9 @@
 env/
 *.pyc
 *.db
+devConfig.cfg
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

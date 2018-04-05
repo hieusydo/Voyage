@@ -1,13 +1,12 @@
-# Statement for enabling the development environment
-DEBUG = True
-
-# Define the application directory
 import os
 
+DEBUG = bool(os.environ.get('V_DEBUG'))
+
 # Define the database - we are working with Postgresql
-# BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
-# SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL'] + os.path.join(BASE_DIR, 'app.db')
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:root@localhost:5432/voyage' # bad, bad, cuz exposing creds... DEV USE ONLY
+SQLALCHEMY_DATABASE_URI = "postgresql://" + os.environ.get('RDS_USERNAME') + ":" + os.environ.get('RDS_PASSWORD')\
+                            + "@" + os.environ.get('RDS_HOSTNAME') + ":" + os.environ.get('RDS_PORT') + "/"\
+                            + os.environ.get('RDS_DB_NAME')
+print(SQLALCHEMY_DATABASE_URI)
 DATABASE_CONNECT_OPTIONS = {}
 
 # Application threads. A common general assumption is
@@ -21,7 +20,7 @@ CSRF_ENABLED     = True
 
 # Use a secure, unique and absolutely secret key for
 # signing the data. 
-CSRF_SESSION_KEY = "Xd34$9Pu"
+CSRF_SESSION_KEY = os.environ.get('CSRF_SESSION_KEY')
 
 # Secret key for signing cookies
-SECRET_KEY = "Gts75*xC"
+SECRET_KEY = os.environ.get('SECRET_KEY')
