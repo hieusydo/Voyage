@@ -9,3 +9,12 @@ class LoginForm(FlaskForm):
                 Required(message='Forgot your email address?')])
     password = PasswordField('Password', [
                 Required(message='Must provide a password')])
+
+# Define the signup form
+class SignupForm(FlaskForm):
+    name     = TextField('Name', [
+                Required(message='Must provide a username')])
+    email    = TextField('Email Address', [Email(),
+                Required(message='Forgot your email address?')])
+    password = PasswordField('Password', [
+                Required(message='Must provide a password')])
