@@ -26,15 +26,11 @@ More:
 1. Instal `pip` 
 1. Install `virtualenv`
 1. Clone the repo. Create your own branch to work on. 
-1. `cd Voyage` and then `virtualenv env` to create a new virtual environment
-1. Install all dependencies: `env/bin/pip install -r requirements.txt`
-1. `env/bin/python run.py` to run the app locally
+1. `cd Voyage` and then `virtualenv your-env` to create your new virtual environment, and activate it.
+1. Install all dependencies: `(your-env)$ pip install -r requirements.txt`
+1. To run the app locally: `(your-env)$ python application.py` 
 
-Advanced: 
-- `$ source env/bin/activate`
-- `(env)$ deactivate`
-
-**Must set your environment variables in order to connect to the database**
+** You must set your environment variables in order to connect to the database**
 
 
 ## How the app flows
@@ -59,3 +55,5 @@ Advanced:
 - http://flask.pocoo.org/docs/0.12/
 - https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications
 
+## Future development
+- Voyage --> blog platform for travellers (Status quo: frequent trallvers have their own website by WP or Squarespace) (Credits: Mo)

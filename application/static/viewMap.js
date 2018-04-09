@@ -2,7 +2,7 @@
 
 // Bascically doing this: <script src="https://maps.googleapis.com/maps/api/..." async defer></script>
 function loadScript(srcScript, myCallback) {
-    var tmpHead = document.getElementsByTagName("HEAD")[0];
+    var tmpHead = document.getElementsByTagName('HEAD')[0];
     var tmpScript = document.createElement('script');
     tmpScript.type = 'text/javascript';
     tmpScript.src = srcScript;
@@ -11,13 +11,16 @@ function loadScript(srcScript, myCallback) {
 }
 
 function drawMap() {
-  console.log("Drawing map...");
+  console.log('drawMap()');
 
   // Make AJAX call to get landmarks
-  var req = new XMLHttpRequest();
-  req.open('GET', 'http://voyage.fkqpxtepmm.us-west-2.elasticbeanstalk.com/landmark/getAll/', true) // true = async
-  req.setRequestHeader('Access-Control-Allow-Origin', '*')
-  req.setRequestHeader('Access-Control-Allow-Headers', '*');
+  var req = new XMLHttpRequest();  
+  var hostPart = location.hostname
+  if (hostPart === 'localhost' || hostPart === '127.0.0.1') {
+    hostPart += (':' + location.port)
+  }
+  var url = 'http://' +  hostPart + '/landmark/getAll/'
+  req.open('GET', url, true) // true = async
 
   req.onreadystatechange = function () {
     if (req.readyState === 4 && req.status === 200) {
