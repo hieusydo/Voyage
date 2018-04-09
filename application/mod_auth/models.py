@@ -35,6 +35,8 @@ class User(Base):
         self.name     = name
         self.email    = email
         self.password = password
+        self.role     = 1
+        self.status   = 1
 
     def __repr__(self):
         return '<User %r>' % (self.name)  

@@ -16,7 +16,7 @@ def getAll():
 
     uid = session['user_id']
     landmarks = Landmark.query.filter_by(usrID=uid).all()
-    # print(landmarks)
+    print(landmarks)
     
     # Extract and reformat each landmark info
     allLms = []

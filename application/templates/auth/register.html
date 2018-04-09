@@ -21,17 +21,19 @@
 
 <div class="container mt-3">
   <div class="row">
-    <legend>Sign in</legend>
+    <legend>Register</legend>
 
-    <form method="POST" action="/auth/verify/" accept-charset="UTF-8" role="form">
-
+    <form method="POST" action="/auth/register_account/" accept-charset="UTF-8" role="form">
+      
+      <input type="name" class='form-control' name="name" placeholder="Your Name" autofocus=""> 
+      <br>
       <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus=""> 
       <br>
       <input type="password" class='form-control' name="password" placeholder="Password" autofocus="">
 
-      <button type="submit" name="submit" class="btn btn-primary mt-3">Sign in</button>
-      <a href="/auth/register/">register</a>
-    </form>
+      <button type="submit" name="submit" class="btn btn-primary mt-3">Register</button>
+      <a href="/auth/signin/">sign in</a>
+    </form>  
   </div>
 </div>
 
