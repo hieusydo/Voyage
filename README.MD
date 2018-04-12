@@ -11,9 +11,9 @@ MVP:
 - [x] (Basic) View landmarks & render on map (`mod_map`): All users' landmarks are queried from the database (see `viewMap.js`) and drawn on the map as a simple red marker. Ref: [Custom style for map](https://developers.google.com/maps/documentation/javascript/styling) and [custom markers](https://developers.google.com/maps/documentation/javascript/custom-markers)
    
 More: 
+- [x] Register
 - [ ] Red marker should be clickable and info about its ratings and photos should be displayed. 
 - [ ] Picture needs to be stored in database. Right now the only thing stored is the filename
-- [ ] Register
 - [ ] Photo collage generator
 - [ ] Recommendation system
 - [ ] Theme management
@@ -30,7 +30,7 @@ More:
 1. Install all dependencies: `(your-env)$ pip install -r requirements.txt`
 1. To run the app locally: `(your-env)$ python application.py` 
 
-** You must set your environment variables in order to connect to the database**
+**You must set your environment variables in order to connect to the database**
 
 
 ## How the app flows

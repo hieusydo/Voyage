@@ -19,21 +19,27 @@
 
 <body>
 
-<div class="container mt-3">
-  <div class="row">
-    <legend>Sign in</legend>
+  <div class="container mt-3">
+    <div class="row">
+      <legend>Sign in</legend>
 
-    <form method="POST" action="/auth/verify/" accept-charset="UTF-8" role="form">
+      <form method="POST" action="/auth/verify/" accept-charset="UTF-8" role="form">
 
-      <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus=""> 
-      <br>
-      <input type="password" class='form-control' name="password" placeholder="Password" autofocus="">
+        <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus="" required> 
+        <br>
+        <input type="password" class='form-control' name="password" placeholder="Password" autofocus="" required>
 
-      <button type="submit" name="submit" class="btn btn-primary mt-3">Sign in</button>
-      <a href="/auth/register/">register</a>
-    </form>
+        <button type="submit" name="submit" class="btn btn-primary mt-3">Sign in</button>
+      </form>
+    </div>
   </div>
-</div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <legend>New User?</legend>
+      <a href="/auth/register/">Register</a>
+    </div>
+  </div>
 
 </body>
 </html>
