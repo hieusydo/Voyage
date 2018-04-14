@@ -12,6 +12,7 @@ MVP:
 - [x] Register   
 
 More: 
+- [x] Register
 - [ ] Red marker should be clickable and info about its ratings and photos should be displayed. 
 https://developers.google.com/maps/documentation/javascript/examples/place-details
 - [ ] Picture needs to be stored in database. Right now the only thing stored is the filename
@@ -31,7 +32,7 @@ https://developers.google.com/maps/documentation/javascript/examples/place-detai
 1. Install all dependencies: `(your-env)$ pip install -r requirements.txt`
 1. To run the app locally: `(your-env)$ python application.py` 
 
-** You must set your environment variables in order to connect to the database**
+**You must set your environment variables in order to connect to the database**
 
 
 ## How the app flows

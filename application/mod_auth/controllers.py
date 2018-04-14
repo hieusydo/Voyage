@@ -19,7 +19,7 @@ def verify():
 
     # if form.validate_on_submit():
     user = User.query.filter_by(email=form.email.data).first()
-    print(user.password, ' ', form.password.data, ' ', check_password_hash(user.password, form.password.data))
+    # print(user.password, ' ', form.password.data, ' ', check_password_hash(user.password, form.password.data))
     if user and check_password_hash(user.password, form.password.data):
         session['user_id'] = user.id
         print("right!")

@@ -11,10 +11,6 @@ application.config.from_object('config')
 # Define the database object 
 db = SQLAlchemy(application)
 
-# Build the database:
-# This will create the database file using SQLAlchemy
-db.create_all()
-
 
 # Import a module / component using its blueprint handler variable
 from application.mod_auth.controllers import mod_auth as auth_module
@@ -35,3 +31,8 @@ def index():
 @application.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
+
+
+# Build the database:
+# This will create the database file using SQLAlchemy
+db.create_all()

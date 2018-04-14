@@ -25,17 +25,23 @@
 
     <form method="POST" action="/auth/register_account/" accept-charset="UTF-8" role="form">
       
-      <input type="name" class='form-control' name="name" placeholder="Your Name" autofocus=""> 
+      <input type="name" class='form-control' name="name" placeholder="Your Name" autofocus="" required> 
       <br>
-      <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus=""> 
+      <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus="" required> 
       <br>
-      <input type="password" class='form-control' name="password" placeholder="Password" autofocus="">
+      <input type="password" class='form-control' name="password" placeholder="Password" autofocus="" required>
 
       <button type="submit" name="submit" class="btn btn-primary mt-3">Register</button>
-      <a href="/auth/signin/">sign in</a>
     </form>  
   </div>
 </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <legend>Already have an account?</legend>
+      <a href="/auth/signin/">Sign in</a>
+    </div>
+  </div>
 
 </body>
 </html>
