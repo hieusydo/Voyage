@@ -21,7 +21,12 @@ def getAll():
     # Extract and reformat each landmark info
     allLms = []
     for l in landmarks:
-        allLms.append((l.lmName, l.lmLat, l.lmLng, l.photoFileName, l.lmRating, l.lmComments))
+        #allLms.append((l.lmPlaceID, l.lmName, l.lmLat, l.lmLng, l.photoFileName, l.lmRating, l.lmComments))
+        allLms.append({"place_id": l.lmPlaceID, "name": l.lmName,
+                       "date_created": l.date_created,
+                       "lat": l.lmLat, "lng": l.lmLng,
+                       "photoFile": l.photoFileName, "rating": l.lmRating,
+                       "comment": l.lmComments})
 
     return jsonify({'landmarks': allLms})
 
@@ -37,7 +42,7 @@ def add():
         filename = secure_filename(form.photoFile.data.filename)
         
         # TODO: actually save the photo
-        # form.photoFile.data.save('./../uploads/' + filename)
+        # form.photoFile.data.save('./../upl2oads/' + filename)
 
         # Simple parsing
         lmParseName = "+".join(form.lmName.data.split(" "))
@@ -48,6 +53,9 @@ def add():
         req = urllib2.Request(geocodeURL)
         res = urllib2.urlopen(req)
         data = json.load(res) # data is a dict 
+
+        # Possible problem with directly extracting place_id?
+        placeID = data["results"][0]["place_id"]
 
         # Extract lattitude and longitude
         lat = 0
@@ -63,7 +71,7 @@ def add():
 
         # Insert into db
         usrID = session['user_id']
-        landmark = Landmark(usrID, form.lmName.data, lat, lng, filename, form.lmRating.data, form.lmComments.data)
+        landmark = Landmark(placeID, usrID, form.lmName.data, lat, lng, filename, form.lmRating.data, form.lmComments.data)
         db.session.add(landmark)
         db.session.commit()
 
