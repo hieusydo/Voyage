@@ -59,21 +59,24 @@ db.create_all()
 
 # Initialize boto3 config/credentials
 # Make a function to avoid polluting global namespace
-# TODO: Remove ugly environ.get hacks
 def initBotoConfig():
-    if not os.path.exists(os.environ.get('AWS_CONFIG_DIRECTORY')):
-        os.makedirs(os.environ.get('AWS_CONFIG_DIRECTORY'))
+    if not os.path.exists('.aws'):
+        os.makedirs('.aws')
 
     # Create default config file if it doesn't exist
-    if not os.path.isfile(os.environ.get('AWS_CONFIG_FILE')):
-        configfile = open(os.environ.get('AWS_CONFIG_FILE'), 'w+')
+    if not os.path.isfile('.aws/config'):
+        configfile = open('.aws/config', 'w+')
         configfile.write("[default]\noutput = json\nregion = us-east-1")
         configfile.close()
     
-    if not os.path.isfile(os.environ.get('AWS_SHARED_CREDENTIALS_FILE')):
-        credentialfile = open(os.environ.get('AWS_SHARED_CREDENTIALS_FILE'), 'w+')
+    if not os.path.isfile('.aws/credentials'):
+        credentialfile = open('.aws/credentials', 'w+')
         credentialfile.write("[default]\naws_access_key_id = " + os.environ.get('AWS_ACCESS_KEY_ID') + "\n")
         credentialfile.write("aws_secret_access_key = " + os.environ.get('AWS_SECRET_ACCESS_KEY'))
         credentialfile.close()
+    
+    # Set required environment variables
+    os.environ['AWS_SHARED_CREDENTIALS_FILE'] = '.aws/credentials'
+    os.environ['AWS_CONFIG_FILE'] = '.aws/config'
 
 initBotoConfig()

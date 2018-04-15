@@ -9,6 +9,14 @@ from application.mod_auth.models import Landmark
 
 mod_landmark = Blueprint('landmark', __name__, url_prefix='/landmark')
 
+# Allowed file extensions
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS and \
+           len(filename) <= 128
+
 @mod_landmark.route('/getAll/', methods=['GET'])
 def getAll():
     if 'user_id' not in session:
@@ -33,21 +41,24 @@ def getAll():
 @mod_landmark.route('/add/', methods=['GET', 'POST'])
 def add():
     if 'user_id' not in session:
-        return redirect(url_for('auth.signin'))    
+        return redirect(url_for('auth.signin'))
     
     form = AddLmForm()
 
     if form.validate_on_submit():
         # Store photo
-        #TODO: add resulting url to table
         photo = form.photoFile.data
-        photo.filename = secure_filename(photo.filename)
-        try:
-            s3 = boto3.client('s3')
-            s3.upload_fileobj(photo, os.environ.get('AWS_S3_BUCKET'), photo.filename)
-        except Exception as e:
-            print e
-        # form.photoFile.data.save('./../uploads/' + filename)
+        # Filename is userid_landmarkname_filename
+        photo.filename = '{}_{}_{}'.format(str(session['user_id']), form.lmName.data, photo.filename)
+        if photo and allowed_file(photo.filename):
+            photo.filename = secure_filename(photo.filename)
+            try:
+                s3 = boto3.client('s3')
+                s3.upload_fileobj(photo, os.environ.get('AWS_S3_BUCKET'), photo.filename, ExtraArgs={
+                    "ContentType": photo.content_type
+                })
+            except Exception as e:
+                print e
 
         # Simple parsing
         lmParseName = "+".join(form.lmName.data.split(" "))
@@ -72,11 +83,12 @@ def add():
         except:
             # TODO: Handle when user-entered landmark can't be geocoded
             # print(data)
-            print("Error reading json obj") 
+            print("Error reading json obj")
 
         # Insert into db
         usrID = session['user_id']
-        landmark = Landmark(usrID, form.lmName.data, lat, lng, photo.filename, form.lmRating.data, form.lmComments.data)
+        fileURL = 'https://{}.s3.amazonaws.com/{}'.format(os.environ.get('AWS_S3_BUCKET'), photo.filename)
+        landmark = Landmark(placeID, usrID, form.lmName.data, lat, lng, fileURL, form.lmRating.data, form.lmComments.data)
         db.session.add(landmark)
         db.session.commit()
 
