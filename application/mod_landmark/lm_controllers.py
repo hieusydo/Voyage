@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, session, redirect, url_for
 from flask.json import jsonify
 from werkzeug import secure_filename
-import urllib2, json
+import urllib2, json, boto3, os
 
 from application import db
 from application.mod_landmark.lm_forms import AddLmForm
@@ -39,10 +39,15 @@ def add():
 
     if form.validate_on_submit():
         # Store photo
-        filename = secure_filename(form.photoFile.data.filename)
-        
-        # TODO: actually save the photo
-        # form.photoFile.data.save('./../upl2oads/' + filename)
+        #TODO: add resulting url to table
+        photo = form.photoFile.data
+        photo.filename = secure_filename(photo.filename)
+        try:
+            s3 = boto3.client('s3')
+            s3.upload_fileobj(photo, os.environ.get('AWS_S3_BUCKET'), photo.filename)
+        except Exception as e:
+            print e
+        # form.photoFile.data.save('./../uploads/' + filename)
 
         # Simple parsing
         lmParseName = "+".join(form.lmName.data.split(" "))
@@ -52,7 +57,7 @@ def add():
                         lmParseName + "&key=AIzaSyDFHbK7fyCZ6ltg9VcHSOhtxKNdYeEQi9w"
         req = urllib2.Request(geocodeURL)
         res = urllib2.urlopen(req)
-        data = json.load(res) # data is a dict 
+        data = json.load(res) # data is a dict
 
         # Possible problem with directly extracting place_id?
         placeID = data["results"][0]["place_id"]
@@ -71,7 +76,7 @@ def add():
 
         # Insert into db
         usrID = session['user_id']
-        landmark = Landmark(placeID, usrID, form.lmName.data, lat, lng, filename, form.lmRating.data, form.lmComments.data)
+        landmark = Landmark(usrID, form.lmName.data, lat, lng, photo.filename, form.lmRating.data, form.lmComments.data)
         db.session.add(landmark)
         db.session.commit()
 
