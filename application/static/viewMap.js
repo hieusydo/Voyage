@@ -12,36 +12,46 @@ function loadScript(srcScript, myCallback) {
 
 function drawMap() {
   console.log('drawMap()');
-
   // Make AJAX call to get landmarks
   var req = new XMLHttpRequest();  
   var hostPart = location.hostname
   if (hostPart === 'localhost' || hostPart === '127.0.0.1') {
     hostPart += (':' + location.port)
   }
+
   var url = 'http://' +  hostPart + '/landmark/getAll/'
   req.open('GET', url, true) // true = async
 
   req.onreadystatechange = function () {
     if (req.readyState === 4 && req.status === 200) {
-        // console.log('Got back response');
+         console.log('Got back response');
         // console.log(req.responseText);
         // Jsonify response
         data = JSON.parse(req.responseText);
+      console.log(data)
         allLms = data.landmarks
 
         // Calculate center of view
+        pid = [];
+        ratings = []
+        comments = [];
         allCoords = [];
+        visitDate = [];
+
         allLat = 0;
         allLng = 0;
         for (i = 0; i < allLms.length; i++ ) {
           l = allLms[i]
-          var coord = { lat: l[1], lng: l[2] };  
+          var coord = { lat: l["lat"], lng: l["lng"] };  
           allCoords.push(coord)
+          pid.push(l["place_id"])
+          ratings.push(l["rating"])
+          comments.push(l["comment"])
+          visitDate.push(l["date_created"])
 
           // Book keeping to find center of view
-          allLat += l[1]
-          allLng += l[2]
+          allLat += l["lat"]
+          allLng += l["lng"]
         }
         centerCoord = { lat: allLat/allLms.length, lng: allLng/allLms.length }
         // console.log("center: ", centerCoord)
@@ -281,13 +291,41 @@ function drawMap() {
         //Associate the styled map with the MapTypeId and set it to display.
         map.mapTypes.set('styled_map', styledMapType);
         map.setMapTypeId('styled_map');
-     
-        // Loop through and draw marker for each
-        for (c = 0; c < allCoords.length; c++ ) {
+
+        //Associate the styled map with the MapTypeId and set it to display.
+
+        var service = new google.maps.places.PlacesService(map);
+        var infowindow = new google.maps.InfoWindow();
+        for (c = 0; c < allLms.length; c++ ) {
+
+          //Place marker
           var marker = new google.maps.Marker({
             position: allCoords[c],
             map: map
           });   
+ 
+          var comment = String(comments[c]);
+          var rating = String(ratings[c]);
+          var date = String(visitDate[c]);
+          if(comment === ""){
+                 comment = "None"
+          }
+
+          //Set up clickable event
+          service.getDetails({
+            placeId: pid[c]
+          }, function(place, status) {
+              //Set up click event for marker
+              google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent('<div><strong>' + place.name + '</strong><br><br>' +
+                        place.formatted_address + '<br><br><strong>' +
+                        'Date Visited: ' + '</strong>' + visitDate + '<br><strong>' +
+                        'Rating: ' + '</strong>' + rating + '<br><br><strong>' +
+                        'Comment: ' + '</strong><br>' + comment +
+                        '</div>');
+                        infowindow.open(map, this);
+          })});
+          
         }
     }
   };
@@ -295,4 +333,5 @@ function drawMap() {
   req.send();
 }
 
-loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDwN4ya6pztrnG0S6wSpiFZfTcKRK-_50o", drawMap);
+
+loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDwN4ya6pztrnG0S6wSpiFZfTcKRK-_50o&libraries=places", drawMap);

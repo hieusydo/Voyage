@@ -45,6 +45,7 @@ class User(Base):
 class Landmark(Base):
     __tablename__ = 'landmark'
 
+    lmPlaceID = db.Column(db.String(128),  nullable=False)
     usrID = db.Column(db.Integer, db.ForeignKey("auth_user.id"), nullable=False)
     lmName = db.Column(db.String(128),  nullable=False)
     lmLat = db.Column(db.Float, nullable=False)
@@ -53,7 +54,8 @@ class Landmark(Base):
     lmRating = db.Column(db.SmallInteger, nullable=False)
     lmComments = db.Column(db.String(192),  nullable=False)
 
-    def __init__(self, uid, name, lat, lng, filename, rating, comments):
+    def __init__(self, pid, uid, name, lat, lng, filename, rating, comments):
+        self.lmPlaceID = pid
         self.usrID = uid
         self.lmName = name
         self.lmLat = lat
