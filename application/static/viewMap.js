@@ -10,8 +10,23 @@ function loadScript(srcScript, myCallback) {
     tmpScript.onload = myCallback;
 }
 
+function attachInfoToMarker(marker, lmDeets) {
+  console.log(lmDeets)
+  var infowindow = new google.maps.InfoWindow();
+  infowindow.setContent('<div>' +
+    '<h6>' + lmDeets['name'] + '</h6>' +
+    '<b>Date Visited: </b>' + lmDeets['date'] + '<br>' +
+    '<b>Rating: </b>' + lmDeets['rating'] + '<br>' +
+    '<b>Comment: </b>' + lmDeets['comment'] + '<br>' + 
+    '</div>'
+  );
+
+  marker.addListener('click', function() {
+    infowindow.open(marker.get('map'), marker);
+  });
+}
+
 function drawMap() {
-  console.log('drawMap()');
   // Make AJAX call to get landmarks
   var req = new XMLHttpRequest();  
   var hostPart = location.hostname
@@ -24,37 +39,23 @@ function drawMap() {
 
   req.onreadystatechange = function () {
     if (req.readyState === 4 && req.status === 200) {
-         console.log('Got back response');
-        // console.log(req.responseText);
         // Jsonify response
         data = JSON.parse(req.responseText);
-      console.log(data)
         allLms = data.landmarks
 
         // Calculate center of view
-        pid = [];
-        ratings = []
-        comments = [];
-        allCoords = [];
-        visitDate = [];
-
+        var allCoords = [];
         allLat = 0;
         allLng = 0;
         for (i = 0; i < allLms.length; i++ ) {
           l = allLms[i]
           var coord = { lat: l["lat"], lng: l["lng"] };  
           allCoords.push(coord)
-          pid.push(l["place_id"])
-          ratings.push(l["rating"])
-          comments.push(l["comment"])
-          visitDate.push(l["date_created"])
-
           // Book keeping to find center of view
           allLat += l["lat"]
           allLng += l["lng"]
         }
         centerCoord = { lat: allLat/allLms.length, lng: allLng/allLms.length }
-        // console.log("center: ", centerCoord)
 
         // Start to draw map
         var styledMapType = new google.maps.StyledMapType([
@@ -292,40 +293,21 @@ function drawMap() {
         map.mapTypes.set('styled_map', styledMapType);
         map.setMapTypeId('styled_map');
 
-        //Associate the styled map with the MapTypeId and set it to display.
-
-        var service = new google.maps.places.PlacesService(map);
-        var infowindow = new google.maps.InfoWindow();
         for (c = 0; c < allLms.length; c++ ) {
-
           //Place marker
           var marker = new google.maps.Marker({
             position: allCoords[c],
             map: map
           });   
- 
-          var comment = String(comments[c]);
-          var rating = String(ratings[c]);
-          var date = String(visitDate[c]);
-          if(comment === ""){
-                 comment = "None"
-          }
 
-          //Set up clickable event
-          service.getDetails({
-            placeId: pid[c]
-          }, function(place, status) {
-              //Set up click event for marker
-              google.maps.event.addListener(marker, 'click', function() {
-                        infowindow.setContent('<div><strong>' + place.name + '</strong><br><br>' +
-                        place.formatted_address + '<br><br><strong>' +
-                        'Date Visited: ' + '</strong>' + visitDate + '<br><strong>' +
-                        'Rating: ' + '</strong>' + rating + '<br><br><strong>' +
-                        'Comment: ' + '</strong><br>' + comment +
-                        '</div>');
-                        infowindow.open(map, this);
-          })});
-          
+          // Add details for each coordinate c
+          var lmDeets = {
+            'name' : allLms[c]['name'],
+            'comment' : allLms[c]['comment'] === "" ? 'None' : allLms[c]['comment'], 
+            'rating' : allLms[c]['rating'],
+            'date' : allLms[c]['date_created'],
+          }           
+          attachInfoToMarker(marker, lmDeets)          
         }
     }
   };
@@ -334,4 +316,4 @@ function drawMap() {
 }
 
 
-loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDwN4ya6pztrnG0S6wSpiFZfTcKRK-_50o&libraries=places", drawMap);
+loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDwN4ya6pztrnG0S6wSpiFZfTcKRK-_50o", drawMap);
