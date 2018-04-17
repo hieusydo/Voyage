@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, redirect, url_for
 
 from flask_sqlalchemy import SQLAlchemy
@@ -31,6 +33,22 @@ def index():
 @application.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
+
+# Cache buster for templates - Ref: http://flask.pocoo.org/snippets/40/
+# Force viewMap.js to reload from source for ez debuggin'
+if bool(os.environ.get('V_DEBUG')):
+    @application.context_processor
+    def override_url_for():
+        return dict(url_for=dated_url_for)
+
+    def dated_url_for(endpoint, **values):
+        if endpoint == 'static':
+            filename = values.get('filename', None)
+            if filename:
+                file_path = os.path.join(application.root_path,
+                                         endpoint, filename)
+                values['q'] = int(os.stat(file_path).st_mtime)
+        return url_for(endpoint, **values)
 
 
 # Build the database:
