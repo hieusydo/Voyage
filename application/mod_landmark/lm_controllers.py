@@ -33,7 +33,7 @@ def getAll():
         allLms.append({"place_id": l.lmPlaceID, "name": l.lmName,
                        "date_created": l.date_created,
                        "lat": l.lmLat, "lng": l.lmLng,
-                       "photoURL": l.photoFileURL, "rating": l.lmRating,
+                       "photo_url": l.photoFileURL, "rating": l.lmRating,
                        "comment": l.lmComments})
 
     return jsonify({'landmarks': allLms})

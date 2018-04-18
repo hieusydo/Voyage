@@ -18,6 +18,7 @@ function attachInfoToMarker(marker, lmDeets) {
     '<b>Date Visited: </b>' + lmDeets['date'] + '<br>' +
     '<b>Rating: </b>' + lmDeets['rating'] + '<br>' +
     '<b>Comment: </b>' + lmDeets['comment'] + '<br>' + 
+    '<img src=' + lmDeets['photo_url'] + ' alt="Uploaded Image" height="200">' +
     '</div>'
   );
 
@@ -306,6 +307,7 @@ function drawMap() {
             'comment' : allLms[c]['comment'] === "" ? 'None' : allLms[c]['comment'], 
             'rating' : allLms[c]['rating'],
             'date' : allLms[c]['date_created'],
+            'photo_url' : allLms[c]['photo_url'],
           }           
           attachInfoToMarker(marker, lmDeets)          
         }
