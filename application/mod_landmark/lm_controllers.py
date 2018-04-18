@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template, session, redirect, url_for
 from flask.json import jsonify
-from werkzeug import secure_filename
+from werkzeug import secure_filename, generate_password_hash
 import urllib2, json, boto3, os
 
 from application import db
@@ -29,11 +29,11 @@ def getAll():
     # Extract and reformat each landmark info
     allLms = []
     for l in landmarks:
-        #allLms.append((l.lmPlaceID, l.lmName, l.lmLat, l.lmLng, l.photoFileName, l.lmRating, l.lmComments))
+        #allLms.append((l.lmPlaceID, l.lmName, l.lmLat, l.lmLng, l.photoFileURL, l.lmRating, l.lmComments))
         allLms.append({"place_id": l.lmPlaceID, "name": l.lmName,
                        "date_created": l.date_created,
                        "lat": l.lmLat, "lng": l.lmLng,
-                       "photoFile": l.photoFileName, "rating": l.lmRating,
+                       "photoURL": l.photoFileURL, "rating": l.lmRating,
                        "comment": l.lmComments})
 
     return jsonify({'landmarks': allLms})
@@ -51,7 +51,8 @@ def add():
         # Filename is userid_landmarkname_filename
         photo.filename = '{}_{}_{}'.format(str(session['user_id']), form.lmName.data, photo.filename)
         if photo and allowed_file(photo.filename):
-            photo.filename = secure_filename(photo.filename)
+            # Hash filename to prevent "easy" access to photos
+            photo.filename = generate_password_hash(photo.filename).split('$')[-1] + '.png'
             try:
                 s3 = boto3.client('s3')
                 s3.upload_fileobj(photo, os.environ.get('AWS_S3_BUCKET'), photo.filename, ExtraArgs={
@@ -89,8 +90,8 @@ def add():
         usrID = session['user_id']
         fileURL = 'https://{}.s3.amazonaws.com/{}'.format(os.environ.get('AWS_S3_BUCKET'), photo.filename)
         landmark = Landmark(placeID, usrID, form.lmName.data, lat, lng, fileURL, form.lmRating.data, form.lmComments.data)
-        db.session.add(landmark)
-        db.session.commit()
+        # db.session.add(landmark)
+        # db.session.commit()
 
         # print(usrID, form.lmName.data, filename, form.lmRating.data, form.lmComments.data)
 
