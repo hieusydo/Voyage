@@ -90,8 +90,8 @@ def add():
         usrID = session['user_id']
         fileURL = 'https://{}.s3.amazonaws.com/{}'.format(os.environ.get('AWS_S3_BUCKET'), photo.filename)
         landmark = Landmark(placeID, usrID, form.lmName.data, lat, lng, fileURL, form.lmRating.data, form.lmComments.data)
-        # db.session.add(landmark)
-        # db.session.commit()
+        db.session.add(landmark)
+        db.session.commit()
 
         # print(usrID, form.lmName.data, filename, form.lmRating.data, form.lmComments.data)
 
