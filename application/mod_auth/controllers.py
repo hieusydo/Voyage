@@ -4,6 +4,7 @@ from werkzeug import check_password_hash, generate_password_hash
 
 from application import db
 from application.mod_auth.forms import LoginForm, SignupForm
+from application.mod_auth.colorTheme import ColorForm, ColorTheme
 from application.mod_auth.models import User
 
 mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
@@ -60,3 +61,22 @@ def home():
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('auth.signin'))
+
+@mod_auth.route('/color/', methods=['GET', 'POST'])
+def color():
+    if 'user_id' not in session:
+        return redirect(url_for('auth.signin'))
+
+    form = ColorForm(request.form)
+
+    if form.validate_on_submit():
+        #Get user, there's only one user
+        user = User.query.filter_by(id=session['user_id']).all()[0]
+        colorTheme = ColorTheme(form)
+        user.theme = colorTheme.themeString
+        
+        db.session.commit()
+
+        return redirect(url_for('map.display'))
+
+    return render_template("auth/color.html", form = form)
