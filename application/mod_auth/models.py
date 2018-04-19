@@ -27,6 +27,9 @@ class User(Base):
     role     = db.Column(db.SmallInteger, nullable=False)
     status   = db.Column(db.SmallInteger, nullable=False)
 
+    # Map Theme
+    theme    = db.Column(db.String(5000), nullable = True)
+
     landmarks = db.relationship("Landmark", backref="user", lazy=True)
 
     # New instance instantiation procedure

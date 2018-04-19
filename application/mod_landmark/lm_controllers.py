@@ -5,7 +5,8 @@ import urllib2, json, boto3, os
 
 from application import db
 from application.mod_landmark.lm_forms import AddLmForm
-from application.mod_auth.models import Landmark
+from application.mod_auth.models import Landmark, User
+from application.mod_auth.colorTheme import ColorTheme
 
 mod_landmark = Blueprint('landmark', __name__, url_prefix='/landmark')
 
@@ -25,6 +26,13 @@ def getAll():
     uid = session['user_id']
     landmarks = Landmark.query.filter_by(usrID=uid).all()
     print(landmarks)
+
+    user = User.query.filter_by(id=session['user_id']).all()[0]
+
+    if (user.theme == ''):
+        theme = eval(ColorTheme().themeString)
+    else:
+        theme = eval(user.theme)
     
     # Extract and reformat each landmark info
     allLms = []
@@ -36,7 +44,7 @@ def getAll():
                        "photo_url": l.photoFileURL, "rating": l.lmRating,
                        "comment": l.lmComments})
 
-    return jsonify({'landmarks': allLms})
+    return jsonify({'landmarks': allLms, 'theme': theme})
 
 @mod_landmark.route('/add/', methods=['GET', 'POST'])
 def add():

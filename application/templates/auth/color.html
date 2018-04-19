@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<!-- HEADER COMPONENT -->
+<head>
+  <title>Voyage</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}">
+  <link rel="mask-icon" href="{{ url_for('static', filename='favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+</head>
+
+<body>
+
+  <!-- TITLE BAR COMPONENT -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/auth/home">Voyage</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <a class="btn btn-sm btn-outline-danger ml-auto my-sm-0" href="/auth/home" role="button">Home</a>
+      <a class="btn btn-sm btn-outline-danger ml-auto my-sm-0" href="/auth/logout" role="button">Log out</a>
+    </div>
+  </nav>
+
+  <!-- NAVBAR COMPONENT -->
+  <div class="container mt-3">
+    <div class="row text-center">
+      <div class="col">
+        <a class="btn btn-primary" href="/landmark/add" role="button">Add</a>
+      </div>
+      <div class="col">
+        <a class="btn btn-primary" href="/map/display" role="button">View All</a>
+      </div>
+      <div class="col">
+        <a class="btn btn-primary" href="/recommend/get" role="button">Suggestions</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Color Selection -->
+    {% macro render_field(field, placeholder=None) %}
+  {% if field.errors %}
+  <div>
+  {% elif field.flags.error %}
+  <div>
+  {% else %}
+  <div>
+  {% endif %}
+      {% set css_class = 'form-control ' + kwargs.pop('class', '') %}
+      {{ field(class=css_class, placeholder=placeholder, **kwargs) }}
+  </div>
+  {% endmacro %}
+
+  <div class="container">
+    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+    {% if errors %}
+    <div>
+    {% for error in errors %}
+    {{ error }}<br>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    {% if form.errors %}
+    <div>
+    {% for field, error in form.errors.items() %}
+    {% for e in error %}
+    {{ e }}<br>
+    {% endfor %}
+    {% endfor %}
+    </div>
+    {% endif %}
+    
+    <form method="POST" action="." accept-charset="UTF-8" role="form" enctype="multipart/form-data">
+
+      {{ form.csrf_token }}
+
+
+      <div class="form-group mb-4">
+        <label for="special_tag">Prebuilt Color Themes</label>
+        <select name="special_tag"">
+          <option value="Custom">Custom</option>
+          <option value="Default">Default</option>
+          <option value="Standard">Standard</option>
+          <option value="Silver">Silver</option>
+          <option value="Dark">Dark</option>
+          <option value="Night">Night</option>
+          <option value="Aubergine">Aubergine</option>
+          <option value="Shades of Grey">Shades of Grey</option>
+          <option value="Desert">Desert</option>
+        </select>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="geometry">Geometry</label>
+        <input name="geometry" type="Color" value="#ebe3cd"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="label_text_fill">Text Fill</label>
+        <input name="label_text_fill" type="Color" value="#523735"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="label_text_stroke">Text Stroke</label>
+        <input name="label_text_stroke" type="Color" value="#f5f1e6"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="administrative_geometry_stroke">Administrative Geometry Stroke</label>
+        <input name="administrative_geometry_stroke" type="Color" value="#c9b2e6"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="administrative_land_parcel_stroke">Administrative Land Parcel Stroke</label>
+        <input name="administrative_land_parcel_stroke" type="Color" value="#dcd2be"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="administrative_land_parcel_fill">Administrative Land Parcel Fill</label>
+        <input name="administrative_land_parcel_fill" type="Color" value="#ae9e90"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="landscape_geometry">Landscape Geometry</label>
+        <input name="landscape_geometry" type="Color" value="#dfd2ae"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="poi_geometry">Point of Interest Geometry</label>
+        <input name="poi_geometry" type="Color" value="#dfd2ae"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="poi_label_text_fill">Point of Interest Text Fill</label>
+        <input name="poi_label_text_fill" type="Color" value="#93817c"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="poi_park_geometry_fill">Point of Interest Geometry Fill</label>
+        <input name="poi_park_geometry_fill" type="Color" value="#a5b076"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="poi_park_text_fill">Point of Interest Part Text Fill</label>
+        <input name="poi_park_text_fill" type="Color" value="#447530"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="road_geometry">Road Geometry</label>
+        <input name="road_geometry" type="Color" value="#f5f1e6"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="road_arterial_geometry">Road Arterial Geometry</label>
+        <input name="road_arterial_geometry" type="Color" value="#fdfcf8"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="road_highway_geometry">Road Highway Geometry</label>
+        <input name="road_highway_geometry" type="Color" value="#f8c967"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="road_highway_geometry_stroke">Road Highway Geometry Stroke</label>
+        <input name="road_highway_geometry_stroke" type="Color" value="#e9bc62"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="road_highway_controlled_access_geometry">Road Highway Controlled Access Geometry</label>
+        <input name="road_highway_controlled_access_geometry" type="Color" value="#e98d58"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="road_highway_controlled_access_geometry_stroke">Road Hightway Controlled Access Geometry Stroke</label>
+        <input name="road_highway_controlled_access_geometry_stroke" type="Color" value="#db8555"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="road_local_text_fill">Road Text Fill</label>
+        <input name="road_local_text_fill" type="Color" value="#806b63"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="transit_line_geometry">Transit Line Geometry</label>
+        <input name="transit_line_geometry" type="Color" value="#dfd2ae"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="transit_line_text_fill">Transit Line Text Fill</label>
+        <input name="transit_line_text_fill" type="Color" value="#8f7d77"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="transit_line_text_stroke">Transit Line Text Stroke</label>
+        <input name="transit_line_text_stroke" type="Color" value="#ebe3cd"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="transit_station_geometry">Transit Station Geometry</label>
+        <input name="transit_station_geometry" type="Color" value="#dfd2ae"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="water_geometry_fill">Water Geometry Fill</label>
+        <input name="water_geometry_fill" type="Color" value="#b9d3c2"/>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="water_text_fill">Water Text Fill</label>
+        <input name="water_text_fill" type="Color" value="#92998d"/>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <!-- For ReactJS -->
+  <!-- <script src="dist/bundle.js" type="text/javascript"></script> -->
+
+</body>
+</html>
