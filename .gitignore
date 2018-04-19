@@ -4,6 +4,7 @@ venv/
 *.pyc
 *.db
 devConfig.cfg
+.*
 
 # Elastic Beanstalk Files
 .ebextensions/

@@ -50,17 +50,17 @@ class Landmark(Base):
     lmName = db.Column(db.String(128),  nullable=False)
     lmLat = db.Column(db.Float, nullable=False)
     lmLng = db.Column(db.Float, nullable=False)
-    photoFileName = db.Column(db.String(128),  nullable=False)
+    photoFileURL = db.Column(db.String(128),  nullable=False)
     lmRating = db.Column(db.SmallInteger, nullable=False)
     lmComments = db.Column(db.String(192),  nullable=False)
 
-    def __init__(self, pid, uid, name, lat, lng, filename, rating, comments):
+    def __init__(self, pid, uid, name, lat, lng, url, rating, comments):
         self.lmPlaceID = pid
         self.usrID = uid
         self.lmName = name
         self.lmLat = lat
         self.lmLng = lng
-        self.photoFileName = filename
+        self.photoFileURL = url
         self.lmRating = rating
         self.lmComments = comments
 
