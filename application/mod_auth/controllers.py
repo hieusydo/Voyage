@@ -23,6 +23,7 @@ def verify():
     # print(user.password, ' ', form.password.data, ' ', check_password_hash(user.password, form.password.data))
     if user and check_password_hash(user.password, form.password.data):
         session['user_id'] = user.id
+        session['username'] = user.name
         print("right!")
         return redirect(url_for('auth.home'))
 
@@ -50,16 +51,27 @@ def register_account():
     
     return redirect(url_for("auth.signin"))
 
-@mod_auth.route('/home/')
+@mod_auth.route('/home/', methods=['GET', 'POST'])
 def home():
     if 'user_id' not in session:
         return redirect(url_for('auth.signin'))
 
-    return render_template("auth/home.html")
+    # Theme change
+    form = ColorForm(request.form)
+    if form.validate_on_submit():
+        #Get user, there's only one user
+        user = User.query.filter_by(id=session['user_id']).all()[0]
+        colorTheme = ColorTheme(form)
+        user.theme = colorTheme.themeString        
+        db.session.commit()
+        return redirect(url_for('map.display'))
+
+    return render_template("auth/home.html", form = form)
 
 @mod_auth.route('/logout/')
 def logout():
     session.pop('user_id', None)
+    session.pop('username', None)
     return redirect(url_for('auth.signin'))
 
 @mod_auth.route('/color/', methods=['GET', 'POST'])

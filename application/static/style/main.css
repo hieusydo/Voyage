@@ -19,8 +19,8 @@ html, body {
 }
 
 #greeting {
-    font-family: 'Pacifico', cursive;
-	font-size: 25px;
+    /*font-family: 'Pacifico', cursive;*/
+	/*font-size: 25px;*/
 }
 
 #markerPopup {
@@ -31,4 +31,15 @@ html, body {
 #markerPopup img {
     max-width: 50%;
     height: auto;
+}
+
+#advanced-op {
+    display: none;
+}
+
+#advanced-op-button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    color: #007bff;
 }

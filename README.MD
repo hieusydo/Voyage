@@ -7,18 +7,18 @@ App is live on AWS! http://voyage.fkqpxtepmm.us-west-2.elasticbeanstalk.com
 
 MVP: 
 - [x] Login (`mod_auth`): Used Flask session to validate each view when the user log in/out
+- [x] Register
 - [x] (Basic) Add a landmark (`mod_landmark`): Used [Google Geocode](https://developers.google.com/maps/documentation/geocoding/intro) to parse the landmark name entered by the user to a coordinate. 
 - [x] (Basic) View landmarks & render on map (`mod_map`): All users' landmarks are queried from the database (see `viewMap.js`) and drawn on the map as a simple red marker. Ref: [Custom style for map](https://developers.google.com/maps/documentation/javascript/styling) and [custom markers](https://developers.google.com/maps/documentation/javascript/custom-markers)
-- [x] Register   
 
 More: 
-- [x] Register
-- [ ] Red marker should be clickable and info about its ratings and photos should be displayed. 
+- [x] Red marker should be clickable and info about its ratings and photos should be displayed. 
 https://developers.google.com/maps/documentation/javascript/examples/place-details
-- [ ] Picture needs to be stored in database. Right now the only thing stored is the filename
+- [x] Picture needs to be stored in database. Right now the only thing stored is the filename
+- [x] Theme management
 - [ ] Photo collage generator
 - [ ] Recommendation system
-- [ ] Theme management
+
 
 
 ## Installation instructions
