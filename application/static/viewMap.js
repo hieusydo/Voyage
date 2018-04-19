@@ -13,11 +13,11 @@ function loadScript(srcScript, myCallback) {
 function attachInfoToMarker(marker, lmDeets) {
   console.log(lmDeets)
   var infowindow = new google.maps.InfoWindow();
-  infowindow.setContent('<div>' +
+  infowindow.setContent('<div id="markerPopup">' +
     '<h6>' + lmDeets['name'] + '</h6>' +
     '<b>Date Visited: </b>' + lmDeets['date'] + '<br>' +
     '<b>Rating: </b>' + lmDeets['rating'] + '<br>' +
-    '<b>Comment: </b>' + lmDeets['comment'] + '<br>' + 
+    '<b>Comment: </b>' + lmDeets['comment'] + '<br><br>' + 
     '<img src=' + lmDeets['photo_url'] + ' alt="Uploaded Image">' +
     '</div>'
   );

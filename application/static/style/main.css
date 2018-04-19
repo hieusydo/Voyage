@@ -22,3 +22,13 @@ html, body {
     font-family: 'Pacifico', cursive;
 	font-size: 25px;
 }
+
+#markerPopup {
+    max-height: 250px;
+    max-width: 250px;
+}
+
+#markerPopup img {
+    max-width: 50%;
+    height: auto;
+}
