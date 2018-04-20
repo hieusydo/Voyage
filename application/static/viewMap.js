@@ -10,13 +10,37 @@ function loadScript(srcScript, myCallback) {
     tmpScript.onload = myCallback;
 }
 
+function formatDate(date) {
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + ' ' + monthNames[monthIndex] + ' ' + year;
+}
+
+function convertToStars(num) {
+  blackStar = '&#9733;'
+  whiteStar = '&#9734;'
+  res = ''
+  for (i = 0; i < num; i++) { res += blackStar }
+  for (i = 0; i < (5 - num); i++) { res += whiteStar }
+  return res
+}
+
 function attachInfoToMarker(marker, lmDeets) {
   console.log(lmDeets)
   var infowindow = new google.maps.InfoWindow();
   infowindow.setContent('<div id="markerPopup">' +
     '<h6>' + lmDeets['name'] + '</h6>' +
-    '<b>Date Visited: </b>' + lmDeets['date'] + '<br>' +
-    '<b>Rating: </b>' + lmDeets['rating'] + '<br>' +
+    '<b>Date Visited: </b>' + formatDate(new Date(lmDeets['date'])) + '<br>' +
+    '<b>Rating: </b>' + convertToStars(lmDeets['rating']) + '<br>' +
     '<b>Comment: </b>' + lmDeets['comment'] + '<br><br>' + 
     '<img src=' + lmDeets['photo_url'] + ' alt="Uploaded Image">' +
     '</div>'

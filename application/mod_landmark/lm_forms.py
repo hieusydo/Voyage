@@ -13,5 +13,5 @@ class AddLmForm(FlaskForm):
     lmName = TextField('Landmark Name', [
                 Required(message='Please enter your landmark')])
     photoFile = FileField("Please select an image to upload", validators=[FileRequired()])
-    lmRating = SelectField('Rating', choices=[('1', 'Excellent'), ('2', 'Good'), ('3', 'OK'),('4', 'Bad'), ('5', 'Terrible')])
+    lmRating = SelectField('Rating', choices=[('5', 'Excellent'), ('4', 'Good'), ('3', 'OK'),('2', 'Bad'), ('1', 'Terrible')])
     lmComments = StringField('Comments', widget=TextArea())
