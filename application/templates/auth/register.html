@@ -18,23 +18,27 @@
 </head>
 
 <body>
+  <!-- TITLE BAR COMPONENT -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/auth/home">Voyage</a>
+  </nav>
 
-<div class="container mt-3">
-  <div class="row">
-    <legend>Register</legend>
+  <div class="container mt-3">
+    <div class="row">
+      <legend>Register</legend>
 
-    <form method="POST" action="/auth/register_account/" accept-charset="UTF-8" role="form">
-      
-      <input type="name" class='form-control' name="name" placeholder="Your Name" autofocus="" required> 
-      <br>
-      <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus="" required> 
-      <br>
-      <input type="password" class='form-control' name="password" placeholder="Password" autofocus="" required>
+      <form method="POST" action="/auth/register_account/" accept-charset="UTF-8" role="form">
 
-      <button type="submit" name="submit" class="btn btn-primary mt-3">Register</button>
-    </form>  
+        <input type="name" class='form-control' name="name" placeholder="Your Name" autofocus="" required> 
+        <br>
+        <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus="" required> 
+        <br>
+        <input type="password" class='form-control' name="password" placeholder="Password" autofocus="" required>
+
+        <button type="submit" name="submit" class="btn btn-primary mt-3">Register</button>
+      </form>  
+    </div>
   </div>
-</div>
 
   <div class="container mt-5">
     <div class="row">
