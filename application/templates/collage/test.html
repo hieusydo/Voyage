@@ -15,23 +15,6 @@
   <meta name="theme-color" content="#ffffff">  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
-
-  <style>
-    #dogPic, #catPic {
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      background: red;
-      top: 10px;
-      left: 10px;
-    }
-
-    #dogPic {
-      background: blue;
-      top: 50px;
-      left: 50px;
-    }
-  </style>
 </head>
 
 <body>
@@ -54,11 +37,6 @@
       <a class="btn btn-sm btn-outline-danger ml-auto my-sm-0" href="/auth/logout" role="button">Log out</a>
     </div>
   </nav>
-  
-  <div id="dogPic"></div>
-  <div id="catPic"></div>
-
-  <script src="{{ url_for('static', filename='imageTest.js') }}"></script>
 
 </body>
 </html>
