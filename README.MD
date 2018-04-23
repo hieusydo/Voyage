@@ -1,6 +1,19 @@
 # Voyage - A Visual Travel Journal
 
-App is live on AWS! http://voyage.fkqpxtepmm.us-west-2.elasticbeanstalk.com
+
+## Demo
+
+App is live on AWS! http://voyage.fkqpxtepmm.us-west-2.elasticbeanstalk.com (at least until my credits run out...)
+
+Screenshots:
+
+![view-map](demo/view-map.png)
+
+![collage-req](demo/collage-req.png)
+
+![collage-res](demo/collage-res.png)
+
+And more in the `demo/` folder!
 
 
 ## Todo

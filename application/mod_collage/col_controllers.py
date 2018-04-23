@@ -27,6 +27,8 @@ def picTest():
     landmarks = Landmark.query.filter_by(usrID=uid).all()
     landmarks.sort(key=lambda x: x.lmName)
 
+    print "picTest", landmarks
+
     # Create a list of value,display tuples from the landmarks
     choices = []
     for i in landmarks:
@@ -37,7 +39,9 @@ def picTest():
     form.setChoices(choices[:5])
 
     if form.validate_on_submit():
+        print "picTest about to generateCollage..."
         url = generateCollage(form.landmark1.data, form.landmark2.data)
+        print "picTest done generateCollage"
         return render_template('collage/result.html', image_url=url)
 
 

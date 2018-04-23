@@ -11,22 +11,32 @@ def generateCollage(url1, url2):
     image1 = loadImage(url1)
     image2 = loadImage(url2)
 
+    print "generateCollage: loaded pics fine"
+
     dim = (654, 253)
 
     # Resize
     resized1 = cv2.resize(image1, dim, interpolation=cv2.INTER_AREA)
     resized2 = cv2.resize(image2, dim, interpolation=cv2.INTER_AREA)
 
+    print "generateCollage: resized fine"   
+
     # Concatenate vertically (one on top of another)
     concat_file = numpy.concatenate((resized1, resized2), axis=0)
     concat_file = cv2.bitwise_not(concat_file)
 
+    print "generateCollage: concatenate vertically (one on top of another)"
+
     # Read mask
     mask = getMask()
+
+    print "generateCollage: got mask"
 
     # Apply mask
     masked_file = cv2.bitwise_and(concat_file, concat_file, mask=mask)
     masked_file = cv2.bitwise_not(masked_file)
+
+    print "generateCollage: applied mask"
 
     # Encode final result
     result,encimg = cv2.imencode('.png',masked_file, [cv2.IMWRITE_PNG_COMPRESSION,0])
@@ -34,11 +44,15 @@ def generateCollage(url1, url2):
         print 'could not encode image!'
         return ''
 
+    print "generateCollage: encoded img"
+
     finalimg = StringIO(encimg.tostring())
 
     # Upload image
     filename = generate_password_hash(url1+url2).split('$')[-1] + '.png'
     uploadImage(filename, finalimg)
+
+    print "generateCollage: uploaded img to S3"
 
     # Return url
     return 'https://{}.s3.amazonaws.com/{}'.format(os.environ.get('AWS_S3_BUCKET'), filename)
