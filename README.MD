@@ -16,8 +16,7 @@ More:
 https://developers.google.com/maps/documentation/javascript/examples/place-details
 - [x] Picture needs to be stored in database. Right now the only thing stored is the filename
 - [x] Theme management
-- [ ] Photo collage generator
-- [ ] Recommendation system
+- [x] Photo collage generator
 
 
 
@@ -37,7 +36,7 @@ https://developers.google.com/maps/documentation/javascript/examples/place-detai
 
 ## How the app flows
 
-- Flow of mod_auth: 
+- Example flow of mod_auth: 
    - import the **controllers** in main `__init__.py` 
    - controllers import **models** (interacting with DB) and **forms** (dependent module)
 
@@ -57,5 +56,3 @@ https://developers.google.com/maps/documentation/javascript/examples/place-detai
 - http://flask.pocoo.org/docs/0.12/
 - https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications
 
-## Future development
-- Voyage --> blog platform for travellers (Status quo: frequent trallvers have their own website by WP or Squarespace) (Credits: Mo)
