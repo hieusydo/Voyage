@@ -104,7 +104,7 @@
 
             <div class="form-group">
               <label for="special_tag">Prebuilt Themes</label>
-              <select name="special_tag"">
+              <select name="special_tag" id="theme-ops">
                 <option value="Custom">Custom</option>
                 <option value="Default" selected="selected">Default</option>
                 <option value="Standard">Standard</option>
@@ -261,12 +261,17 @@
 <script type="text/javascript">
   function showAdvancedOps() {
     var x = document.getElementById("advanced-op");
-    console.log(x.style.display)
+    var themeChosen = document.getElementById("theme-ops");
+    // console.log(x.style.display)
     if (x.style.display === "none" || x.style.display === "") {
       x.style.display = "block";    
+      themeChosen.value = "Custom"
+      
     } else {
       x.style.display = "none";
+      themeChosen.value = "Default"
     }
+    // console.log(themeChosen.value)
   }  
 
 </script>
