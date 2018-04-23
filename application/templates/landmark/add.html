@@ -81,7 +81,7 @@
 
       <div class="form-group mb-4">
         <label for="landmarkName">Landmark Name</label>
-        {{ render_field(form.lmName, class="form-control", id="lmName", placeholder="Enter landmark")}}
+        {{ render_field(form.lmName, class="form-control", id="lmName", placeholder="Enter landmark", maxlength="128")}}
       </div>
 
       <div class="form-group mb-4">
@@ -96,7 +96,7 @@
 
       <div class="form-group mb-4">
         <label for="landmarkComment">Notes</label>
-        {{ render_field(form.lmComments, class="form-control", id="lmComment", cols="35", rows="3")}}
+        {{ render_field(form.lmComments, class="form-control", id="lmComment", cols="35", rows="3", maxlength="192")}}
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

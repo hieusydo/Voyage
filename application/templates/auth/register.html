@@ -29,11 +29,11 @@
 
       <form method="POST" action="/auth/register_account/" accept-charset="UTF-8" role="form">
 
-        <input type="name" class='form-control' name="name" placeholder="Your Name" autofocus="" required> 
+        <input type="name" class='form-control' name="name" placeholder="Your Name" autofocus="" maxlength="128" required> 
         <br>
-        <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus="" required> 
+        <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus="" maxlength="128" required> 
         <br>
-        <input type="password" class='form-control' name="password" placeholder="Password" autofocus="" required>
+        <input type="password" class='form-control' name="password" placeholder="Password" autofocus="" maxlength="192" required>
 
         <button type="submit" name="submit" class="btn btn-primary mt-3">Register</button>
       </form>  

@@ -54,6 +54,10 @@ def add():
     form = AddLmForm()
 
     if form.validate_on_submit():
+
+        if len(form.lmName.data) > 128 or len(form.lmComments.data) > 192: 
+            return
+
         # Store photo
         photo = form.photoFile.data
         # Filename is userid_landmarkname_filename

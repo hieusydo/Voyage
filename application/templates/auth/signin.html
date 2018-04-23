@@ -30,9 +30,9 @@
 
       <form method="POST" action="/auth/verify/" accept-charset="UTF-8" role="form">
 
-        <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus="" required> 
+        <input type="email" class='form-control' name="email" placeholder="Your Email Address" autofocus="" maxlength="128" required> 
         <br>
-        <input type="password" class='form-control' name="password" placeholder="Password" autofocus="" required>
+        <input type="password" class='form-control' name="password" placeholder="Password" autofocus="" maxlength="128" required>
 
         <button type="submit" name="submit" class="btn btn-primary mt-3">Sign in</button>
       </form>
