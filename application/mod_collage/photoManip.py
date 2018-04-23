@@ -19,12 +19,14 @@ def generateCollage(url1, url2):
 
     # Concatenate vertically (one on top of another)
     concat_file = numpy.concatenate((resized1, resized2), axis=0)
+    concat_file = cv2.bitwise_not(concat_file)
 
     # Read mask
     mask = getMask()
 
     # Apply mask
     masked_file = cv2.bitwise_and(concat_file, concat_file, mask=mask)
+    masked_file = cv2.bitwise_not(masked_file)
 
     # Encode final result
     result,encimg = cv2.imencode('.png',masked_file, [cv2.IMWRITE_PNG_COMPRESSION,0])
