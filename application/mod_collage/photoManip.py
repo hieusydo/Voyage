@@ -1,5 +1,8 @@
 import cv2, numpy, urllib, boto3, os
+from cStringIO import StringIO
 from werkzeug import generate_password_hash
+from flask import Flask
+app = Flask(__name__)
 
 # Generates a collage of New York given two image urls
 # Returns the url to the uploaded collage
@@ -18,14 +21,22 @@ def generateCollage(url1, url2):
     concat_file = numpy.concatenate((resized1, resized2), axis=0)
 
     # Read mask
-    mask = cv2.imread("ny_map.png",0)
+    mask = getMask()
 
     # Apply mask
     masked_file = cv2.bitwise_and(concat_file, concat_file, mask=mask)
 
+    # Encode final result
+    result,encimg = cv2.imencode('.png',masked_file, [cv2.IMWRITE_PNG_COMPRESSION,0])
+    if not result:
+        print 'could not encode image!'
+        return ''
+
+    finalimg = StringIO(encimg.tostring())
+
     # Upload image
     filename = generate_password_hash(url1+url2).split('$')[-1] + '.png'
-    uploadImage(filename, masked_file)
+    uploadImage(filename, finalimg)
 
     # Return url
     return 'https://{}.s3.amazonaws.com/{}'.format(os.environ.get('AWS_S3_BUCKET'), filename)
@@ -33,7 +44,7 @@ def generateCollage(url1, url2):
 # Downloads the image from the url and returns it as an image
 def loadImage(url):
     resp = urllib.urlopen(url)
-    image = np.asarray(bytearray(resp.read()), dtype="uint8")
+    image = numpy.asarray(bytearray(resp.read()), dtype="uint8")
     image = cv2.imdecode(image, cv2.IMREAD_COLOR)
 
     return image
@@ -47,3 +58,15 @@ def uploadImage(filename, image):
         })
     except Exception as e:
         print e
+
+# Reads the mask stored inside the application
+def getMask():
+    # Read the image
+    img_str = ''
+    with app.open_resource('ny_map.png') as f:
+        img_str = f.read()
+
+    # Decode the image
+    nparr = numpy.fromstring(img_str, numpy.uint8)
+    img_np = cv2.imdecode(nparr, 0)
+    return img_np
