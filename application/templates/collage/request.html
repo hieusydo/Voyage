@@ -53,7 +53,9 @@
 
   <div class="container mt-3 mb-3">
 
-    <h2>Add a Landmark</h2>
+    <h2 class="mb-3">Personalize your journey!</h2>
+    <p>Currently, Voyage will create a collage out of the New York State shape</p>
+    <p class="text-muted"><small>More layouts coming soon...</small></p>
 
     {% with errors = get_flashed_messages(category_filter=["error"]) %}
     {% if errors %}
@@ -80,26 +82,18 @@
       {{ form.csrf_token }}
 
       <div class="form-group mb-4">
-        <label for="landmarkName">Landmark Name</label>
-        {{ render_field(form.lmName, class="form-control", id="lmName", placeholder="Enter landmark")}}
+        <label for="landmarkOne"><b>Landmark 1</b></label>
+        {{ render_field(form.landmark1) }}
       </div>
 
       <div class="form-group mb-4">
-        <label for="photoUpload">Upload your photos</label>
-        <!-- {{ form.hidden_tag() }} -->
-        {{ render_field(form.photoFile) }}
+        <label for="landmarkTwo"><b>Landmark 2</b></label>
+        {{ render_field(form.landmark2) }}
       </div>
-
-      <div class="form-group mb-4">
-        {{ render_field(form.lmRating)}}
-      </div>
-
-      <div class="form-group mb-4">
-        <label for="landmarkComment">Notes</label>
-        {{ render_field(form.lmComments, class="form-control", id="lmComment", cols="35", rows="3")}}
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      
+      <button type="submit" class="btn btn-primary">See your collage</button>
     </form>
   </div>
+
 </body>
 </html>

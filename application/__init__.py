@@ -20,11 +20,13 @@ db = SQLAlchemy(application)
 from application.mod_auth.controllers import mod_auth as auth_module
 from application.mod_map.map_controllers import mod_map as map_module
 from application.mod_landmark.lm_controllers import mod_landmark as lm_module
+from application.mod_collage.col_controllers import mod_collage as col_module
 
 # Register blueprints
 application.register_blueprint(auth_module)
 application.register_blueprint(map_module)
 application.register_blueprint(lm_module)
+application.register_blueprint(col_module)
 
 
 @application.route("/")
