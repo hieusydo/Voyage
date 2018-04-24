@@ -36,7 +36,7 @@ def picTest():
 
     # Create and set the form choices
     form = AddColForm()
-    form.setChoices(choices[:5])
+    form.setChoices(choices)
 
     if form.validate_on_submit():
         print "picTest about to generateCollage..."
