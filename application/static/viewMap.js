@@ -86,7 +86,7 @@ function drawMap() {
         // Start to draw map
         var styledMapType = new google.maps.StyledMapType(theme)
         var map = new google.maps.Map(document.getElementById('voyageMap'), {
-          zoom: 5,
+          zoom: 10,
           center: centerCoord,
           mapTypeControlOptions: {
             mapTypeIds: ['styled_map']
