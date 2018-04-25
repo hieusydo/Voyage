@@ -35,7 +35,7 @@ function convertToStars(num) {
 }
 
 function attachInfoToMarker(marker, lmDeets) {
-  console.log(lmDeets)
+  // console.log(lmDeets)
   var infowindow = new google.maps.InfoWindow();
   infowindow.setContent('<div id="markerPopup">' +
     '<h6>' + lmDeets['name'] + '</h6>' +

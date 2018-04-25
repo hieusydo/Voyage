@@ -18,11 +18,6 @@ html, body {
     font-size: 30px;
 }
 
-#greeting {
-    /*font-family: 'Pacifico', cursive;*/
-	/*font-size: 25px;*/
-}
-
 #markerPopup {
     max-height: 250px;
     max-width: 250px;
@@ -42,8 +37,4 @@ html, body {
     border: none;
     text-decoration: underline;
     color: #007bff;
-}
-
-.navbar {
-    /*font-family: 'Pacifico', cursive;  */
 }
